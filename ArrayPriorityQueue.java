@@ -6,33 +6,33 @@ HW#32: ArrayPriorityQueue
 */
 import java.util.*;
 
-public class ArrayPriorityQueue implements PriorityQueue {
+public class ArrayPriorityQueue<T extends Comparable<T>> implements PriorityQueue {
 
-  private ArrayList<Ticket> data;
+  private ArrayList<T> data;
 
   public ArrayPriorityQueue() {
-    data = new ArrayList<Ticket>();
+    data = new ArrayList<T>();
   }
 
   // Traverses through the whole list and adding to the spot proper spot in its priority rating
   public void add(Object d) {
     for (int i = 0; i < data.size(); i++) {
-	if (((Ticket)d).compareTo(data.get(i)) >= 0) {
-	    data.add(i, (Ticket) d);
+	if (((T)d).compareTo(data.get(i)) >= 0) {
+	    data.add(i, (T) d);
         return;
       }
     }
-    data.add((Ticket)d);
+    data.add((T)d);
   } //O(n)
 
   //checks the end of the ArrayList
-  public Ticket peekMin() {
+  public T peekMin() {
     return data.get(data.size() - 1);
   } //O(1)
 
   // removes from the back of the ArrayList
-  public Ticket removeMin() {
-    Ticket ret = peekMin();
+  public T removeMin() {
+    T ret = peekMin();
     data.remove(data.size() - 1);
     return ret;
   } //O(1)
@@ -48,15 +48,15 @@ public class ArrayPriorityQueue implements PriorityQueue {
 
   public String toString() {
     String ret = "[";
-    for (Ticket x : data) {
-      ret += x.getCaseNum() + ", ";
+    for (T x : data) {
+	ret += x.toString() + ", ";
     }
     ret += "]";
     return ret;
   } //O(n)
 
   public static void main(String[] args) {
-    ArrayPriorityQueue mwah = new ArrayPriorityQueue();
+    ArrayPriorityQueue<Ticket> mwah = new ArrayPriorityQueue<Ticket>();
     for (int i = 0; i <= 20; i++) {
 	Ticket as = new Ticket("data" + i, "I failed to pass my APs", i, (int)(Math.random() * 5), (int)(Math.random() * 10), "N/A");
       System.out.println(as);
