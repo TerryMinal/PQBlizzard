@@ -1,7 +1,7 @@
 public interface PriorityQueue{
   public boolean isEmpty();
 
-  public void add(Ticket x);
+  public void add(Object x);
 
   public Object removeMin();
 

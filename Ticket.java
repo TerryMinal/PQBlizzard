@@ -1,20 +1,22 @@
 //ticket class for storing priority and data
 public class Ticket implements Comparable{
-
-  //the higher the number the greater the priority
-  private String name;
-  private String descrip;
-  private int caseNum;
-  private int status;
-  private int priority;
-
-  public Ticket(String name, String descrip, int caseNum, int status, int priority) {
-    this.name = name;
-    this.descrip = descrip;
-    this.caseNum = caseNum;
-    this.status = status;
-    this.priority = priority;
-  }
+    
+    //the higher the number the greater the priority
+    private String name;
+    private String descrip;
+    private int caseNum;
+    private int status;
+    private int priority;
+    private String solution; 
+    
+    public Ticket(String name, String descrip, int caseNum, int status, int priority, String solution) {
+	this.name = name;
+	this.descrip = descrip;
+	this.caseNum = caseNum;
+	this.status = status;
+	this.priority = priority;
+	this.solution = solution; 
+    }
 
   public int compareTo(Object t) {
       int p = this.priority;
@@ -48,6 +50,10 @@ public class Ticket implements Comparable{
     return priority;
   }
 
+    public String getSolution() {
+	return solution; 
+    }
+
   // ------ MUTATOR METHODS ------
   public String setName(String newName) {
     String oldName = name;
@@ -80,6 +86,11 @@ public class Ticket implements Comparable{
     return oldP;
   }
 
+    public String setSolution(String newSolution) {
+	String oldSol = solution; 
+	solution = newSolution; 
+	return oldSol; 
+    }
 
   public String toString() {
     return "priority: " + priority + " case#: " + caseNum;

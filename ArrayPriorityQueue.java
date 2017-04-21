@@ -15,14 +15,14 @@ public class ArrayPriorityQueue implements PriorityQueue {
   }
 
   // Traverses through the whole list and adding to the spot proper spot in its priority rating
-  public void add(Ticket d) {
+  public void add(Object d) {
     for (int i = 0; i < data.size(); i++) {
-      if (d.compareTo(data.get(i)) >= 0) {
-        data.add(i, d);
+	if (((Ticket)d).compareTo(data.get(i)) >= 0) {
+	    data.add(i, (Ticket) d);
         return;
       }
     }
-    data.add(d);
+    data.add((Ticket)d);
   } //O(n)
 
   //checks the end of the ArrayList
@@ -58,7 +58,7 @@ public class ArrayPriorityQueue implements PriorityQueue {
   public static void main(String[] args) {
     ArrayPriorityQueue mwah = new ArrayPriorityQueue();
     for (int i = 0; i <= 20; i++) {
-      Ticket as = new Ticket("data" + i, "I failed to pass my APs", i, (int)(Math.random() * 5), (int)(Math.random() * 10));
+	Ticket as = new Ticket("data" + i, "I failed to pass my APs", i, (int)(Math.random() * 5), (int)(Math.random() * 10), "N/A");
       System.out.println(as);
       mwah.add(as);
     }
