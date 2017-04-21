@@ -1,5 +1,5 @@
 //ticket class for storing priority and data
-public class Ticket implements Comparable{
+public class Ticket implements Comparable<Ticket>{
     
     //the higher the number the greater the priority
     private String name;
@@ -18,9 +18,9 @@ public class Ticket implements Comparable{
 	this.solution = solution; 
     }
 
-  public int compareTo(Object t) {
+  public int compareTo(Ticket t) {
       int p = this.priority;
-      int p2 = ((Ticket)t).priority;
+      int p2 = t.priority;
       if (p == p2)
         return 0;
       else if (p < p2)
