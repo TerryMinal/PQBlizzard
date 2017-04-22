@@ -1,76 +1,78 @@
-/*
-Terry Guan
-APCS2 PD3
-HW#32: ArrayPriorityQueue
-2017-04-20
-*/
 import java.util.*;
 
-public class ArrayPriorityQueue<T extends Comparable<T>> implements PriorityQueue {
+public class ArrayPriorityQueue<T extends Comparable<T>> implements PriorityQueue{
 
-  private ArrayList<T> data;
+    private ArrayList<T> _data;
+    private int _ticketID;
 
-  public ArrayPriorityQueue() {
-    data = new ArrayList<T>();
-  }
-
-  // Traverses through the whole list and adding to the spot proper spot in its priority rating
-  public void add(Object d) {
-    for (int i = 0; i < data.size(); i++) {
-	if (((T)d).compareTo(data.get(i)) >= 0) {
-	    data.add(i, (T) d);
-        return;
-      }
+    public ArrayPriorityQueue() {
+	_data = new ArrayList<T>();
+	_ticketID = 0;
     }
-    data.add((T)d);
-  } //O(n)
 
-  //checks the end of the ArrayList
-  public T peekMin() {
-    return data.get(data.size() - 1);
-  } //O(1)
-
-  // removes from the back of the ArrayList
-  public T removeMin() {
-    T ret = peekMin();
-    data.remove(data.size() - 1);
-    return ret;
-  } //O(1)
-
-
-  public boolean isEmpty() {
-    return data.size() == 0;
-  } //O(1)
-
-  public int size() {
-    return data.size();
-  } //O(1)
-
-  public String toString() {
-    String ret = "[";
-    for (T x : data) {
-	ret += x.toString() + ", ";
+    public int getID(){
+	return ticketID;
     }
-    ret += "]";
-    return ret;
-  } //O(n)
 
-  public static void main(String[] args) {
-    ArrayPriorityQueue<Ticket> mwah = new ArrayPriorityQueue<Ticket>();
-    for (int i = 0; i <= 20; i++) {
-	Ticket as = new Ticket("data" + i, "I failed to pass my APs", i, (int)(Math.random() * 5), (int)(Math.random() * 10), "N/A");
-      System.out.println(as);
-      mwah.add(as);
-    }
-    System.out.println(mwah);
-    System.out.println("checking removing");
-    int siz = mwah.size();
-    for (int i = 0; i < siz; i++) {
-      System.out.print(mwah.removeMin() + " ");
-    }
-    System.out.println();
-    //checks if anything still exists in the arrayList
-    System.out.println(mwah);
-  } //end of main
+    // Traverses through the whole list and adding to the spot proper spot in its priority rating
+    public void add(Object d) {
+	for (int i = 0; i < _data.size(); i++) {
+	    if (((T)d).compareTo(_data.get(i)) >= 0) {
+		_data.add(i, (T) d);
+		_ticketID += 1;
+		return;
+	    }
+	}
+	_data.add((T)d);
+	_ticketID += 1;
+    } //O(n)
+
+    //checks the end of the ArrayList
+    public T peekMin() {
+	return _data.get(data.size() - 1);
+    } //O(1)
+
+    // removes from the back of the ArrayList
+    public T removeMin() {
+	T ret = peekMin();
+	_data.remove(data.size() - 1);
+	return ret;
+    } //O(1)
+
+
+    public boolean isEmpty() {
+	return _data.size() == 0;
+    } //O(1)
+
+    public int size() {
+	return _data.size();
+    } //O(1)
+
+    public String toString() {
+	String ret = "[";
+	for (T x : _data) {
+	    ret += x.toString() + ", ";
+	}
+	ret += "]";
+	return ret;
+    } //O(n)
+
+    public static void main(String[] args) {
+	ArrayPriorityQueue<Ticket> mwah = new ArrayPriorityQueue<Ticket>();
+	for (int i = 0; i <= 20; i++) {
+	    Ticket as = new Ticket("data" + i, "I failed to pass my APs", i, (int)(Math.random() * 5), (int)(Math.random() * 10), "N/A");
+	    System.out.println(as);
+	    mwah.add(as);
+	}
+	System.out.println(mwah);
+	System.out.println("checking removing");
+	int siz = mwah.size();
+	for (int i = 0; i < siz; i++) {
+	    System.out.print(mwah.removeMin() + " ");
+	}
+	System.out.println();
+	//checks if anything still exists in the arrayList
+	System.out.println(mwah);
+    } //end of main
 
 } //end of ArrayPriorityQueue
