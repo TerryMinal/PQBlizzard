@@ -10,7 +10,7 @@ public class ArrayPriorityQueue<T extends Comparable<T>> implements PriorityQueu
 	_ticketID = 0;
     }
 
-    public int getID(){
+    public int getNewID(){
 	return ticketID;
     }
 
