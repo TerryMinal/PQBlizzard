@@ -2,12 +2,18 @@ import java.util.*;
 import java.io.*;
 public class HelpDesk{
   private ArrayPriorityQueue line;
+  private int _ticketID;
 
   private HelpDesk() {
-    line = new ArrayPriorityQueue(); 
+    line = new ArrayPriorityQueue();
+    _ticketID = 0;
   }
 
-  public void askBasicInfo(){
+  public int getNewID(){
+    return _ticketID;
+  }
+
+  public void addTicket(){
     System.out.println("Welcome to our help desk!");
 
     System.out.println("Please enter your name: ");
@@ -23,10 +29,11 @@ public class HelpDesk{
       priority = Keyboard.readInt();
     }
 
-    int caseNum = line.getNewID();
-    System.out.println("Your case number is " + caseNum + ".\nThanks for choosing us.");
+    System.out.println("Your case number is " + _ticketID + ".\nThanks for choosing us.");
 
-    Ticket newTicket = new Ticket(name, descrip, caseNum, 0, priority, null);
+    Ticket newTicket = new Ticket(name, descrip, _ticketID, 0, priority, null);
+    line.add(newTicket);
+    _ticketID++;
   }
 
   public static void main(String[] args){
@@ -34,6 +41,8 @@ public class HelpDesk{
     //get int counter for id number from APQ
     //build ticket and add to APQ
     HelpDesk Google = new HelpDesk();
-    Google.askBasicInfo();
+    for (int i = 0; i < 5; i++)
+      Google.addTicket();
+    System.out.println(Google.line);
   }
 }

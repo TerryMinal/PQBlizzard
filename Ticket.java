@@ -1,35 +1,35 @@
 //ticket class for storing priority and data
 public class Ticket implements Comparable<Ticket>{
-    
-    //the higher the number the greater the priority
-    private String name;
-    private String descrip;
-    private int caseNum;
-    private int status;
-    private int priority;
-    private String solution; 
-    
-    public Ticket(String name, String descrip, int caseNum, int status, int priority, String solution) {
-	this.name = name;
-	this.descrip = descrip;
-	this.caseNum = caseNum;
-	this.status = status;
-	this.priority = priority;
-	this.solution = solution; 
-    }
 
-  public int compareTo(Ticket t) {
-      int p = this.priority;
-      int p2 = t.priority;
-      if (p == p2)
-        return 0;
-      else if (p < p2)
-        return -1;
-      else
-        return 1;
+  //the higher the number the greater the priority
+  private String name;
+  private String descrip; // description of the issue
+  private int caseNum;
+  private int status; //0 = Request sent to helpDesk 1 = Request has begun on resolving issue 2 = Issue is almost done 3 = Issue resolved 4 = Issue unresolvable
+  private int priority;
+  private String solution; // description of the solution if any
+
+  public Ticket(String name, String descrip, int caseNum, int status, int priority, String solution) {
+    this.name = name;
+    this.descrip = descrip;
+    this.caseNum = caseNum;
+    this.status = status;
+    this.priority = priority;
+    this.solution = solution;
   }
 
- // ------- ACESSOR METHODS -------
+  public int compareTo(Ticket t) {
+    int p = this.priority;
+    int p2 = t.priority;
+    if (p == p2)
+      return 0;
+    else if (p < p2)
+      return -1;
+    else
+      return 1;
+  }
+
+  // ------- ACESSOR METHODS -------
   public String getName() {
     return name;
   }
@@ -50,9 +50,9 @@ public class Ticket implements Comparable<Ticket>{
     return priority;
   }
 
-    public String getSolution() {
-	return solution; 
-    }
+  public String getSolution() {
+    return solution;
+  }
 
   // ------ MUTATOR METHODS ------
   public String setName(String newName) {
@@ -86,11 +86,11 @@ public class Ticket implements Comparable<Ticket>{
     return oldP;
   }
 
-    public String setSolution(String newSolution) {
-	String oldSol = solution; 
-	solution = newSolution; 
-	return oldSol; 
-    }
+  public String setSolution(String newSolution) {
+    String oldSol = solution;
+    solution = newSolution;
+    return oldSol;
+  }
 
   public String toString() {
     return "priority: " + priority + " case#: " + caseNum;

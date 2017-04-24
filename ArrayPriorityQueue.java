@@ -3,28 +3,21 @@ import java.util.*;
 public class ArrayPriorityQueue<T extends Comparable<T>> implements PriorityQueue{
 
   private ArrayList<T> _data;
-  private int _ticketID;
 
   public ArrayPriorityQueue() {
     _data = new ArrayList<T>();
-    _ticketID = 0;
   }
 
-  public int getNewID(){
-    return _ticketID;
-  }
 
   // Traverses through the whole list and adding to the spot proper spot in its priority rating
   public void add(Object d) {
     for (int i = 0; i < _data.size(); i++) {
       if (((T)d).compareTo(_data.get(i)) >= 0) {
         _data.add(i, (T) d);
-        _ticketID += 1;
         return;
       }
     }
     _data.add((T)d);
-    _ticketID += 1;
   } //O(n)
 
   //checks the end of the ArrayList
