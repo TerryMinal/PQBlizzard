@@ -1,7 +1,21 @@
+/*To do: (in order of priority)
+  1. Line 50
+      Make a place for unresolvable and resolved tickets to go to in the afterlife so the customer may hear of the tales they have to tell.
+
+  2. Line 105
+      Cannot view tickets. Implement "To do #1", then print toString() of ticket.
+
+  3. Line 116
+      Will not print current description of ticket along with relevant info.
+
+  3. Line 65
+      Change the printed message, I am still too braindead at the moment...
+ */
+
 import java.util.*;
 import java.io.*;
 public class HelpDesk{
-    private ArrayPriorityQueue _line;
+    private ArrayPriorityQueue<Ticket> _line;
     private int _ticketID;
 
     private HelpDesk() {
@@ -14,15 +28,38 @@ public class HelpDesk{
     }
 
     public String getTicketToString(){
-	_line.peekMin()
+	return _line.peekMin().toString();
     }
     
     public void updateTicket(){
-	
-    }
-
-    public void MarkTicketAsSolved(){
-
+	Ticket ticket = _line.peekMin();
+	ticket.setStatus(1); //no matter what happens, work has begun on ticket.
+	ticket.toString();
+	if (ticket.getSolution() == null){
+	    System.out.println("There were no previous posted solutions. Please write a solution.");
+	    ticket.setSolution(Keyboard.readString());
+	} else {
+	    System.out.println("Here is the previous posted solution. Do you want to update it?\n1 Yes\n2 No");
+	    int input = Keyboard.readInt();
+	    while(input != 1 && input != 2){
+		System.out.println("Please enter a valid non-negative integer");
+		input = Keyboard.readInt();
+	    }
+	    if(input == 1){
+		System.out.println("Please write a solution.");
+		ticket.setSolution(Keyboard.readString());
+	    }
+	}
+	System.out.println("What is the status on the issue?\n1 Work in progress\n2 Issue resolved\n3 Issue unresolvable");
+	int input = Keyboard.readInt();
+	while(input != 1 && input != 2 && input != 3){
+	    System.out.println("Please enter a valid non-negative integer");
+	    input = Keyboard.readInt();
+	}
+	ticket.setStatus(input);
+	if (input == 2 || input == 3){
+	    _line.removeMin(); //WHOEVER SEES THIS, DO SOMETHING WITH THIS
+	}
     }
 
     public void addTicket(){
@@ -34,7 +71,7 @@ public class HelpDesk{
 	System.out.println("\nWhat is the problem? ");
 	String descrip = Keyboard.readString();
 
-	System.out.println("Lastly, what is your pay grade? (Please enter a non-negative integer)"); //change?
+	System.out.println("Lastly, what is your pay grade? (Please enter a non-negative integer)"); //change? smh... no one reads my comments
 	int priority = Keyboard.readInt();
 	while(priority < 0){
 	    System.out.println("Please enter a valid non-negative integer");
@@ -71,13 +108,16 @@ public class HelpDesk{
 		if(task == 1){
 		    CallCenter.addTicket();
 		    break;
+		} else if (task == 2){
+		    //retrieve ticket by ID and display toString
 		} else if (task == 3) {
 		    int resolveAnother = 1;
-		    while (resolveAnother != 1 || resolveAnother != 2){
-			System.out.println("please enter an accepted integer value.\n1 Yes\n No");
+		    while (resolveAnother != 1 && resolveAnother != 2){
+			System.out.println("Will you resolve another ticket?\n1 Yes\n No");
 		    }
 		    if (resolveAnother == 1){
-			//resolve here
+			CallCenter.getTicketToString();
+			CallCenter.updateTicket();
 		    } else {
 			break;
 		    }
